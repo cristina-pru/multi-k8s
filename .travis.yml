@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t cristina-pru/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t dockercristina/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run cristina-pru/react-test npm test -- --coverage
+  - docker run dockercristina/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t cristina-pru/multi-client ./client
-  - docker build -t cristina-pru/multi-nginx ./nginx
-  - docker build -t cristina-pru/multi-server ./server
-  - docker build -t cristina-pru/multi-worker ./worker
+  - docker build -t dockercristina/multi-client ./client
+  - docker build -t dockercristina/multi-nginx ./nginx
+  - docker build -t dockercristina/multi-server ./server
+  - docker build -t dockercristina/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push cristina-pru/multi-client
-  - docker push cristina-pru/multi-nginx
-  - docker push cristina-pru/multi-server
-  - docker push cristina-pru/multi-worker
+  - docker push dockercristina/multi-client
+  - docker push dockercristina/multi-nginx
+  - docker push dockercristina/multi-server
+  - docker push dockercristina/multi-worker
